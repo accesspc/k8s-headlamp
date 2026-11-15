@@ -1,0 +1,24 @@
+---
+config:
+  sessionTTL: null
+
+ingress:
+  enabled: true
+
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+
+  hosts:
+    - host: headlamp.reiciunas.dev
+      paths:
+        - path: /
+          type: Prefix
+
+  ingressClassName: nginx
+
+  tls:
+    - hosts:
+        - headlamp.reiciunas.dev
+      secretName: headlamp.reiciunas.dev-tls
